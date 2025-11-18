@@ -1,7 +1,8 @@
 
 // Select one of the Password versions to test
 
-// import { Password } from "../src/BugNeverContainsNumbers"
+import { Password } from "../src/BugNeverContainsNumbers"
+
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
@@ -12,7 +13,7 @@
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
-import { Password } from '../src/BugToShortPassword'
+// import { Password } from '../src/BugToShortPassword'
 
 // import { Password } from '../src/Correct'
 
@@ -23,7 +24,7 @@ describe('Password class, test suite', () => {
 
     test('Constructor should throw an error if password is too short', () => {
         function tooShortPassword() {
-            const testPassword = 'Test1234567'
+            const testPassword = 'Test1234567' // Testing limit of 11 characters
             new Password(testPassword)
         }
 
