@@ -20,10 +20,16 @@ describe('Password class, test suite', () => {
 
     test('Constructor should throw an error if password is too short', () => {
         function tooShortPassword() {
+            const testPassword = 'Test123456'
+            new Password(testPassword)
+        }
+
+        function veryShortPassword() {
             const testPassword = 'Test1'
             new Password(testPassword)
         }
-        expect(tooShortPassword).toThrow('Too short password')
+        
+        expect(tooShortPassword && veryShortPassword).toThrow('Too short password')
     });
 
     test('Constructor should throw an error if password does not contain numbers', () => {
