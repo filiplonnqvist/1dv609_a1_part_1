@@ -1,17 +1,20 @@
 
 // Select one of the Password versions to test
 
+// import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
-// import { Password } from '../src/BugMissingNumberCheck'
-// import { Password } from '../src/BugMissingPasswordCheck'
-// import { Password } from '../src/BugNeverContainsNumbers'
-// import { Password } from '../src/BugToShortPassword'
-// import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
-import { Password } from '../src/Correct'
+
+// FINISHED
+// import { Password } from '../src/BugMissingPasswordCheck'
+// import { Password } from '../src/BugMissingNumberCheck'
+// import { Password } from '../src/BugVeryShort'
+import { Password } from '../src/BugToShortPassword'
+
+// import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
@@ -20,7 +23,7 @@ describe('Password class, test suite', () => {
 
     test('Constructor should throw an error if password is too short', () => {
         function tooShortPassword() {
-            const testPassword = 'Test123456'
+            const testPassword = 'Test1234567'
             new Password(testPassword)
         }
 
@@ -28,9 +31,11 @@ describe('Password class, test suite', () => {
             const testPassword = 'Test1'
             new Password(testPassword)
         }
-        
-        expect(tooShortPassword && veryShortPassword).toThrow('Too short password')
-    });
+
+        expect(tooShortPassword).toThrow('Too short password')
+        expect(veryShortPassword).toThrow('Too short password')
+
+    })
 
     test('Constructor should throw an error if password does not contain numbers', () => {
         function passwordWithoutNumbers() {
@@ -39,4 +44,4 @@ describe('Password class, test suite', () => {
         }
         expect(passwordWithoutNumbers).toThrow('No number found')
     })
-});
+})
