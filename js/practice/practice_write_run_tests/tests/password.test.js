@@ -1,7 +1,7 @@
 
 // Select one of the Password versions to test
 
-import { Password } from '../src/BugDoesNotHash'
+// import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from '../src/BugMissingNumberCheck'
@@ -11,15 +11,26 @@ import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
-// import { Password } from '../src/Correct'
+import { Password } from '../src/Correct'
+
 
 describe('Password class, test suite', () => {
-    //put constants here to increase readability
-    const emptyPassword = '';
+    const emptyPassword = ''
+    const correctPassword = 'Test12345678'
 
-    test('replace this test with one of your own and add more', () => {
-        expect(true).toBe(true);
+    test('Constructor should throw an error if password is too short', () => {
+        function tooShortPassword() {
+            const testPassword = 'Test1'
+            new Password(testPassword)
+        }
+        expect(tooShortPassword).toThrow('Too short password')
     });
 
-    //Add your tests here
+    test('Constructor should throw an error if password does not contain numbers', () => {
+        function passwordWithoutNumbers() {
+            const testPassword = 'TestPasswordWithoutNumbers'
+            new Password(testPassword)
+        }
+        expect(passwordWithoutNumbers).toThrow('No number found')
+    })
 });
