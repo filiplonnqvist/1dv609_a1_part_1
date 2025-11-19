@@ -11,7 +11,7 @@
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
-// import { Password } from '../src/Correct'
+import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
@@ -53,6 +53,17 @@ describe('Password class, test suite', () => {
         const arePasswordsTheSame = firstPassword.isPasswordSame(secondPassword)
 
         expect(arePasswordsTheSame).toBe(false)
+
+    })
+
+    test('isPasswordSame() should throw an error if password is not an instance', () => {
+        function incorrectInputShouldThrowError() {
+            const firstPassword = new Password('FirstPassword12345')
+            const secondPassword = 'SecondPassword12345'
+            firstPassword.isPasswordSame(secondPassword)
+        }
+
+        expect(incorrectInputShouldThrowError).toThrow('Invalid argument')
 
     })
 
