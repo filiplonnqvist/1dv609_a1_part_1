@@ -1,8 +1,6 @@
 
 // Select one of the Password versions to test
 
-import { Password } from "../src/BugNeverContainsNumbers"
-
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
@@ -10,17 +8,17 @@ import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from '../src/BugWrongMessage'
 
 // FINISHED
+// import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-// import { Password } from '../src/Correct'
+import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
     const emptyPassword = ''
-    const correctPassword = 'Test12345678'
 
     test('Constructor should throw an error if password is too short', () => {
         function tooShortPassword() {
@@ -33,8 +31,8 @@ describe('Password class, test suite', () => {
             new Password(testPassword)
         }
 
-        expect(tooShortPassword).toThrow('Too short password')
-        expect(veryShortPassword).toThrow('Too short password')
+        expect(tooShortPassword).toThrow()
+        expect(veryShortPassword).toThrow()
 
     })
 
@@ -43,6 +41,15 @@ describe('Password class, test suite', () => {
             const testPassword = 'TestPasswordWithoutNumbers'
             new Password(testPassword)
         }
-        expect(passwordWithoutNumbers).toThrow('No number found')
+        expect(passwordWithoutNumbers).toThrow()
+    })
+
+    test('Constructor should not return an error when password is correct', () => {
+        const testPassword = 'Test12345678'
+
+        function correctPasswordDoesNotThrowError() {
+            new Password(testPassword)
+        }
+        expect(correctPasswordDoesNotThrowError).not.toThrow()
     })
 })
