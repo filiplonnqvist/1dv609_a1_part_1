@@ -11,7 +11,9 @@
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
-import { Password } from '../src/Correct'
+
+// import { Password } from '../src/Correct'
+import { Password } from '../src/BugSelf-compare'
 
 
 describe('Password class, test suite', () => {
@@ -90,6 +92,6 @@ describe('Password class, test suite', () => {
         const password = new Password(input)
         const actualHash = password.getPasswordHash()
 
-        expect(expectedHash !== actualHash).toBe(false)
+        expect(expectedHash === actualHash).toBe(true)
     })
 })
