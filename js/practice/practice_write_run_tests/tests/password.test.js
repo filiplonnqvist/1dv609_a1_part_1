@@ -3,18 +3,18 @@
 
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
-// import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugWrongMessage'
 
 // FINISHED
+// import { Password } from '../src/BugisPasswordAlwaysSame'
 // import { Password } from "../src/BugNeverContainsNumbers"
 // import { Password } from '../src/BugMissingPasswordCheck'
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-import { Password } from '../src/Correct'
+// import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
@@ -47,9 +47,19 @@ describe('Password class, test suite', () => {
     test('Constructor should not return an error when password is correct', () => {
         const testPassword = 'Test12345678'
 
-        function correctPasswordDoesNotThrowError() {
+        function correctPasswordShouldNotThrowError() {
             new Password(testPassword)
         }
-        expect(correctPasswordDoesNotThrowError).not.toThrow()
+        expect(correctPasswordShouldNotThrowError).not.toThrow()
+    })
+
+    test('Password is not the same', () => {
+        const firstPassword = new Password('FirstPassword12345')
+        const secondPassword = new Password('SecondPassword12345')
+
+        const arePasswordsTheSame = firstPassword.isPasswordSame(secondPassword)
+
+        expect(arePasswordsTheSame).toBe(false)
+
     })
 })
