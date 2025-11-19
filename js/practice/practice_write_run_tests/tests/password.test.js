@@ -14,26 +14,20 @@
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-// import { Password } from '../src/Correct'
+import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
-    const emptyPassword = ''
 
     test('Constructor should throw an error if password is too short', () => {
-        function tooShortPassword() {
-            const testPassword = 'Test1234567' // Testing limit of 11 characters
-            new Password(testPassword)
+        const tooShortPasswords = [
+            'Test1234567',
+            'Test1'
+        ]
+
+        for (const password of tooShortPasswords) {
+            expect(() => new Password(password)).toThrow('Too short password')
         }
-
-        function veryShortPassword() {
-            const testPassword = 'Test1'
-            new Password(testPassword)
-        }
-
-        expect(tooShortPassword).toThrow()
-        expect(veryShortPassword).toThrow()
-
     })
 
     test('Constructor should throw an error if password does not contain numbers', () => {
@@ -41,7 +35,7 @@ describe('Password class, test suite', () => {
             const testPassword = 'TestPasswordWithoutNumbers'
             new Password(testPassword)
         }
-        expect(passwordWithoutNumbers).toThrow()
+        expect(passwordWithoutNumbers).toThrow('No number found')
     })
 
     test('Constructor should not return an error when password is correct', () => {
@@ -50,7 +44,7 @@ describe('Password class, test suite', () => {
         function correctPasswordShouldNotThrowError() {
             new Password(testPassword)
         }
-        expect(correctPasswordShouldNotThrowError).not.toThrow()
+        expect(correctPasswordShouldNotThrowError).not.toThrow('No number found')
     })
 
     test('Password is not the same', () => {
