@@ -1,10 +1,11 @@
 
 // Select one of the Password versions to test
 
-// import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 
+
 // FINISHED
+// import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugWrongMessage'
 // import { Password } from '../src/BugisPasswordAlwaysSame'
@@ -14,7 +15,7 @@
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-import { Password } from '../src/Correct'
+// import { Password } from '../src/Correct'
 
 
 describe('Password class, test suite', () => {
@@ -66,5 +67,13 @@ describe('Password class, test suite', () => {
         const arePasswordsTrimmed = passwordWithoutWhitespace.isPasswordSame(passwordWithWhitespace)
 
         expect(arePasswordsTrimmed).toBe(true)
+    })
+
+    test('Constructor should hash password', () => {
+        const testPasswordBeforeHash = 'Test12345678'
+        const testPassword = new Password(testPasswordBeforeHash)
+        const testPasswordAfterHash = testPassword.getPasswordHash(testPassword)
+
+        expect(testPasswordBeforeHash === testPasswordAfterHash).toBe(false)
     })
 })
