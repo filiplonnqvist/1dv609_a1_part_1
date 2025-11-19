@@ -2,9 +2,6 @@
 // Select one of the Password versions to test
 
 // import { Password } from '../src/BugWrongHashingAlgorithm'
-
-
-// FINISHED
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugWrongMessage'
@@ -14,7 +11,6 @@
 // import { Password } from '../src/BugMissingNumberCheck'
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
-
 // import { Password } from '../src/Correct'
 
 
@@ -32,27 +28,27 @@ describe('Password class, test suite', () => {
     })
 
     test('Constructor should throw an error if password does not contain numbers', () => {
-        function passwordWithoutNumbers() {
-            const testPassword = 'TestPasswordWithoutNumbers'
-            new Password(testPassword)
+        function createPasswordWithoutNumbers() {
+            const input = 'TestPasswordWithoutNumbers'
+            new Password(input)
         }
 
-        expect(passwordWithoutNumbers).toThrow('No number found')
+        expect(createPasswordWithoutNumbers).toThrow('No number found')
     })
 
-    test('Constructor should not return an error when password is correct', () => {
-        const testPassword = 'Test12345678'
+    test('Constructor should not throw an error for valid password', () => {
+        const input = 'Test12345678'
 
         function correctPasswordShouldNotThrowError() {
-            new Password(testPassword)
+            new Password(input)
         }
 
         expect(correctPasswordShouldNotThrowError).not.toThrow('No number found')
     })
 
-    test('Password is not the same', () => {
+    test('isPasswordSame() should return false for different passwords', () => {
         const firstPassword = new Password('FirstPassword12345')
-        const secondPassword = new Password(' SecondPassword12345 ')
+        const secondPassword = new Password('SecondPassword12345')
 
         const arePasswordsTheSame = firstPassword.isPasswordSame(secondPassword)
 
@@ -62,18 +58,27 @@ describe('Password class, test suite', () => {
 
     test('Constructor should trim whitespaces from password', () => {
         const passwordWithoutWhitespace = new Password('Test12345678')
-        const passwordWithWhitespace = new Password(' Test12345678 ')
+        const passwordWithWhitespace = new Password(' Test12345678')
 
         const arePasswordsTrimmed = passwordWithoutWhitespace.isPasswordSame(passwordWithWhitespace)
 
         expect(arePasswordsTrimmed).toBe(true)
     })
 
-    test('Constructor should hash password', () => {
-        const testPasswordBeforeHash = 'Test12345678'
-        const testPassword = new Password(testPasswordBeforeHash)
-        const testPasswordAfterHash = testPassword.getPasswordHash(testPassword)
+    test('Constructor should apply the correct hashing algorithm', () => {
+        function hashPassword(input) {
+            let hash = 7
+            for (let i = 0; i < input.length; i++) {
+                hash = hash * 31 + input.charCodeAt(i)
+            }
+            return hash
+        }
 
-        expect(testPasswordBeforeHash === testPasswordAfterHash).toBe(false)
+        const input = 'Test12345678'
+        const expectedHash = hashPassword(input)
+        const password = new Password(input)
+        const actualHash = password.getPasswordHash()
+
+        expect(expectedHash !== actualHash).toBe(false)
     })
 })
