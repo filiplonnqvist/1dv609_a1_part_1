@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "t1": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose practice/practice_write_run_test",
-    "t2": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose practice/practice_write_mocked_tests"
+    "t1": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --coverage practice/practice_write_run_test",
+    "t2": "node --experimental-vm-modules node_modules/jest/bin/jest.js --verbose --coverage practice/practice_write_mocked_tests"
   },
   "keywords": [],
   "author": "",
