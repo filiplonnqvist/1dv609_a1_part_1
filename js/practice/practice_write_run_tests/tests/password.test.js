@@ -54,7 +54,7 @@ describe('Password class, test suite', () => {
 
         const arePasswordsTheSame = firstPassword.isPasswordSame(secondPassword)
 
-        expect(arePasswordsTheSame).toBe(false)
+        expect(arePasswordsTheSame).toBeFalsy()
 
     })
 
@@ -75,7 +75,7 @@ describe('Password class, test suite', () => {
 
         const arePasswordsTrimmed = passwordWithoutWhitespace.isPasswordSame(passwordWithWhitespace)
 
-        expect(arePasswordsTrimmed).toBe(true)
+        expect(arePasswordsTrimmed).toBeTruthy()
     })
 
     test('Constructor should apply the correct hashing algorithm', () => {
@@ -92,6 +92,6 @@ describe('Password class, test suite', () => {
         const password = new Password(input)
         const actualHash = password.getPasswordHash()
 
-        expect(expectedHash === actualHash).toBe(true)
+        expect(expectedHash === actualHash).toBeTruthy()
     })
 })
