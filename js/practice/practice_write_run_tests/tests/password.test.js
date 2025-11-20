@@ -1,7 +1,7 @@
 
 // Select one of the Password versions to test
 
-import { Password } from '../src/BugWrongHashingAlgorithm'
+// import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
 // import { Password } from '../src/BugWrongMessage'
