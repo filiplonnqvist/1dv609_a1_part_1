@@ -9,9 +9,11 @@ describe('SwedishSocialSecurityNumber Tests', () => {
 
     beforeEach(() => {
         mockHelper = {
-            isCorrectLength: jest.fn(),
-            isCorrectFormat: jest.fn(),
-            isValidMonth: jest.fn()
+            isCorrectLength: jest.fn().mockReturnValue(true),
+            isCorrectFormat: jest.fn().mockReturnValue(true),
+            isValidMonth: jest.fn().mockReturnValue(true),
+            isValidDay: jest.fn().mockReturnValue(true),
+            luhnisCorrect: jest.fn().mockReturnValue(true)
         }
     })
 
@@ -41,10 +43,11 @@ describe('SwedishSocialSecurityNumber Tests', () => {
         mockHelper.isValidMonth.mockReturnValue(false)
 
         function createSSN() {
-            new SwedishSocialSecurityNumber('770722-3322', mockHelper)
+            new SwedishSocialSecurityNumber('770022-3322', mockHelper)
         }
 
         expect(createSSN).toThrow('Invalid month in SSN')
-        expect(mockHelper.isValidMonth).toHaveBeenCalledWith('07')
+        expect(mockHelper.isValidMonth).toHaveBeenCalledWith('00')
     })
+
 });
