@@ -1,6 +1,6 @@
 import { beforeEach, expect, jest } from '@jest/globals';
 
-import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber';
+// import { SwedishSocialSecurityNumber } from '../src/correct/SwedishSocialSecurityNumber';
 
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecutityNumberNoLuhn';
 // import { SwedishSocialSecurityNumber } from '../src/bugs/BuggySwedishSocialSecurityNumberNoLenCheck';
