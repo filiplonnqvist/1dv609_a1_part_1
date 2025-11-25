@@ -1,6 +1,8 @@
 
 // Select one of the Password versions to test
 
+import { Password } from "../src/Correct"
+
 // import { Password } from '../src/BugWrongHashingAlgorithm'
 // import { Password } from '../src/BugDoesNotHash'
 // import { Password } from '../src/BugDoesNotTrim'
@@ -12,7 +14,7 @@
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-import { Password } from '../src/Correct'
+// import { Password } from '../src/Correct'
 // import { Password } from '../src/BugSelf-compare'
 
 
@@ -30,22 +32,13 @@ describe('Password class, test suite', () => {
     })
 
     test('Constructor should throw an error if password does not contain numbers', () => {
-        function createPasswordWithoutNumbers() {
-            const input = 'TestPasswordWithoutNumbers'
-            new Password(input)
-        }
-
-        expect(createPasswordWithoutNumbers).toThrow('No number found')
+        const input = 'TestPasswordWithoutNumbers'
+        expect(() => new Password(input)).toThrow('No number found')
     })
 
     test('Constructor should not throw an error for valid password', () => {
         const input = 'Test12345678'
-
-        function correctPasswordShouldNotThrowError() {
-            new Password(input)
-        }
-
-        expect(correctPasswordShouldNotThrowError).not.toThrow('No number found')
+        expect(() => new Password(input)).not.toThrow('No number found')
     })
 
     test('isPasswordSame() should return false for different passwords', () => {
@@ -59,13 +52,9 @@ describe('Password class, test suite', () => {
     })
 
     test('isPasswordSame() should throw an error if password is not an instance', () => {
-        function incorrectInputShouldThrowError() {
-            const firstPassword = new Password('FirstPassword12345')
-            const secondPassword = 'SecondPassword12345'
-            firstPassword.isPasswordSame(secondPassword)
-        }
-
-        expect(incorrectInputShouldThrowError).toThrow('Invalid argument')
+        const firstPassword = 'FirstPassword12345'
+        const secondPassword = 'SecondPassword12345'
+        expect(() => new Password(firstPassword).isPasswordSame(secondPassword)).toThrow('Invalid argument')
 
     })
 
