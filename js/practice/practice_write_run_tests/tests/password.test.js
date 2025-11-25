@@ -12,7 +12,7 @@
 // import { Password } from '../src/BugVeryShort'
 // import { Password } from '../src/BugToShortPassword'
 
-// import { Password } from '../src/Correct'
+import { Password } from '../src/Correct'
 // import { Password } from '../src/BugSelf-compare'
 
 
@@ -70,12 +70,10 @@ describe('Password class, test suite', () => {
     })
 
     test('Constructor should trim whitespaces from password', () => {
-        const passwordWithoutWhitespace = new Password('Test12345678')
-        const passwordWithWhitespace = new Password(' Test12345678')
+        const passwordWithoutWhitespace = new Password('Test12345678').getPasswordHash()
+        const passwordWithWhitespace = new Password(' Test12345678').getPasswordHash()
 
-        const arePasswordsTrimmed = passwordWithoutWhitespace.isPasswordSame(passwordWithWhitespace)
-
-        expect(arePasswordsTrimmed).toBeTruthy()
+        expect(passwordWithoutWhitespace).toEqual(passwordWithWhitespace)
     })
 
     test('Constructor should apply the correct hashing algorithm', () => {
@@ -89,9 +87,8 @@ describe('Password class, test suite', () => {
 
         const input = 'Test12345678'
         const expectedHash = hashPassword(input)
-        const password = new Password(input)
-        const actualHash = password.getPasswordHash()
+        const actualHash = new Password(input).getPasswordHash()
 
-        expect(expectedHash === actualHash).toBeTruthy()
+        expect(expectedHash).toEqual(actualHash)
     })
 })

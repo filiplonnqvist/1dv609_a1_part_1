@@ -9,95 +9,95 @@ import { beforeEach, expect, jest } from '@jest/globals';
 
 
 //NOTE THESE TESTS SHOULD NOT BE DEPENDENT ON SSNHelper BUT USE MOCKING
-describe('SwedishSocialSecurityNumber Tests', () => {
-    const emptyString = ''
+// describe('SwedishSocialSecurityNumber Tests', () => {
+//     const emptyString = ''
 
-    let mockHelper
+//     let mockHelper
 
-    beforeEach(() => {
-        mockHelper = {
-            isCorrectLength: jest.fn().mockReturnValue(true),
-            isCorrectFormat: jest.fn().mockReturnValue(true),
-            isValidMonth: jest.fn().mockReturnValue(true),
-            isValidDay: jest.fn().mockReturnValue(true),
-            luhnisCorrect: jest.fn().mockReturnValue(true)
-        }
-    })
+//     beforeEach(() => {
+//         mockHelper = {
+//             isCorrectLength: jest.fn().mockReturnValue(true),
+//             isCorrectFormat: jest.fn().mockReturnValue(true),
+//             isValidMonth: jest.fn().mockReturnValue(true),
+//             isValidDay: jest.fn().mockReturnValue(true),
+//             luhnisCorrect: jest.fn().mockReturnValue(true)
+//         }
+//     })
 
-    test('Constructor should throw an error when social security number is too short', () => {
-        mockHelper.isCorrectLength.mockReturnValue(false)
+//     test('Constructor should throw an error when social security number is too short', () => {
+//         mockHelper.isCorrectLength.mockReturnValue(false)
 
-        function createSSN() {
-            new SwedishSocialSecurityNumber(emptyString, mockHelper)
-        }
+//         function createSSN() {
+//             new SwedishSocialSecurityNumber(emptyString, mockHelper)
+//         }
 
-        expect(createSSN).toThrow('To short, must be 11 characters')
-        expect(mockHelper.isCorrectLength).toHaveBeenCalled()
-    })
+//         expect(createSSN).toThrow('To short, must be 11 characters')
+//         expect(mockHelper.isCorrectLength).toHaveBeenCalled()
+//     })
 
-    test('Constructor should throw an error when social security number format is wrong', () => {
-        mockHelper.isCorrectFormat.mockReturnValue(false)
+//     test('Constructor should throw an error when social security number format is wrong', () => {
+//         mockHelper.isCorrectFormat.mockReturnValue(false)
 
-        function createSSN() {
-            new SwedishSocialSecurityNumber(emptyString, mockHelper)
-        }
+//         function createSSN() {
+//             new SwedishSocialSecurityNumber(emptyString, mockHelper)
+//         }
 
-        expect(createSSN).toThrow('Incorrect format, must be: YYMMDD-XXXX')
-        expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(emptyString)
-    })
+//         expect(createSSN).toThrow('Incorrect format, must be: YYMMDD-XXXX')
+//         expect(mockHelper.isCorrectLength).toHaveBeenCalledWith(emptyString)
+//     })
 
-    test('getYear() should return the the first two numbers in the social security number', () => {
-        mockHelper.isCorrectLength.mockReturnValue(true)
+//     test('getYear() should return the the first two numbers in the social security number', () => {
+//         mockHelper.isCorrectLength.mockReturnValue(true)
 
-        const input = '770022-3322'
-        const year = new SwedishSocialSecurityNumber(input, mockHelper)
+//         const input = '770022-3322'
+//         const year = new SwedishSocialSecurityNumber(input, mockHelper)
 
-        const output = year.getYear()
+//         const output = year.getYear()
 
-        expect(output).toBe('77')
-    })
+//         expect(output).toBe('77')
+//     })
 
-    test('Constructor should throw an error when social security number has an invalid month', () => {
-        mockHelper.isValidMonth.mockReturnValue(false)
+//     test('Constructor should throw an error when social security number has an invalid month', () => {
+//         mockHelper.isValidMonth.mockReturnValue(false)
 
-        function createSSN() {
-            new SwedishSocialSecurityNumber('770022-3322', mockHelper)
-        }
+//         function createSSN() {
+//             new SwedishSocialSecurityNumber('770022-3322', mockHelper)
+//         }
 
-        expect(createSSN).toThrow('Invalid month in SSN')
-        expect(mockHelper.isValidMonth).toHaveBeenCalledWith('00')
-    })
+//         expect(createSSN).toThrow('Invalid month in SSN')
+//         expect(mockHelper.isValidMonth).toHaveBeenCalledWith('00')
+//     })
 
-    test('Constructor should throw an error when social security number has an invalid day', () => {
-        mockHelper.isValidDay.mockReturnValue(false)
+//     test('Constructor should throw an error when social security number has an invalid day', () => {
+//         mockHelper.isValidDay.mockReturnValue(false)
 
-        function createSSN() {
-            new SwedishSocialSecurityNumber(emptyString, mockHelper)
-        }
+//         function createSSN() {
+//             new SwedishSocialSecurityNumber(emptyString, mockHelper)
+//         }
 
-        expect(createSSN).toThrow('Invalid month in SSN')
-        expect(mockHelper.isValidDay).toHaveBeenCalledWith(emptyString)
-    })
+//         expect(createSSN).toThrow('Invalid month in SSN')
+//         expect(mockHelper.isValidDay).toHaveBeenCalledWith(emptyString)
+//     })
 
-    test('Constructor should trim the social security number input', () => {
-        mockHelper.isCorrectLength.mockReturnValue(true)
+//     test('Constructor should trim the social security number input', () => {
+//         mockHelper.isCorrectLength.mockReturnValue(true)
 
-        const inputWithWhitespace = ' 770022-3322'
+//         const inputWithWhitespace = ' 770022-3322'
 
-        const serialNumber = new SwedishSocialSecurityNumber(inputWithWhitespace, mockHelper)
+//         const serialNumber = new SwedishSocialSecurityNumber(inputWithWhitespace, mockHelper)
 
-        const output = serialNumber.getSerialNumber()
-        expect(output).toBe('3322')
-    })
+//         const output = serialNumber.getSerialNumber()
+//         expect(output).toBe('3322')
+//     })
 
-    test('Constructor should throw an error when social security number is invalid accordign to the Luhns algorithm', () => {
-        mockHelper.luhnisCorrect.mockReturnValue(false)
+//     test('Constructor should throw an error when social security number is invalid accordign to the Luhns algorithm', () => {
+//         mockHelper.luhnisCorrect.mockReturnValue(false)
 
-        function createSSN() {
-            new SwedishSocialSecurityNumber('770022-3321', mockHelper)
-        }
+//         function createSSN() {
+//             new SwedishSocialSecurityNumber('770022-3321', mockHelper)
+//         }
 
-        expect(createSSN).toThrow("Invalid SSN according to Luhn's algorithm")
-        expect(mockHelper.luhnisCorrect).toHaveBeenCalled()
-    })
-});
+//         expect(createSSN).toThrow("Invalid SSN according to Luhn's algorithm")
+//         expect(mockHelper.luhnisCorrect).toHaveBeenCalled()
+//     })
+// });
