@@ -11,45 +11,33 @@ describe('SSNHelpe Tests', () => {
 
     test('isCorrectLength() should return false when social security number has more than 11 characters', () => {
         const input = '12345678-9012'
-        const output = helper.isCorrectLength(input)
-
-        expect(output).toBeFalsy()
+        expect(helper.isCorrectLength(input)).toBeFalsy()
     })
 
     test('isCorrectFormat() should return false when social security number has the incorrect format', () => {
         const input = '123456-XXXX'
-        const output = helper.isCorrectFormat(input)
-
-        expect(output).toBeFalsy()
+        expect(helper.isCorrectFormat(input)).toBeFalsy()
     })
 
     test('isValidMonth() should return false when month is less than 1', () => {
         const input = '00'
-        const output = helper.isValidMonth(input)
-
-        expect(output).toBeFalsy()
+        expect(helper.isValidMonth(input)).toBeFalsy()
     })
 
     test('isValidMonth() should return false when month is more than than 12', () => {
         for (let i = '1'; i <= '12'; i++) {
-            const month = helper.isValidMonth(i)
-            expect(month).toBeTruthy()
+            expect(helper.isValidMonth(i)).toBeTruthy()
         }
     })
 
     test('isValidDay() should return true when day is 31', () => {
         for (let i = '1'; i <= '31'; i++) {
-            const day = helper.isValidDay(i)
-            expect(day).toBeTruthy()
+            expect(helper.isValidDay(i)).toBeTruthy()
         }
     })
 
     test('luhnisCorrect() should return true when social security number pass the Luhn check', () => {
         const input = '770722-3322'
-        const output = helper.luhnisCorrect(input)
-
-        expect(output).toBeTruthy()
+        expect(helper.luhnisCorrect(input)).toBeTruthy()
     })
-
-
 });
